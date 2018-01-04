@@ -8,32 +8,32 @@ def logisticRegression():
     X = data[:,0:-1]
     y = data[:,-1]
     
-    # »®·ÖÎªÑµÁ·¼¯ºÍ²âÊÔ¼¯
+    # # åˆ’åˆ†ä¸ºè®­ç»ƒé›†å’Œæµ‹è¯•é›†
     x_train,x_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
     
-    # ¹éÒ»»¯
+    # å½’ä¸€åŒ–
     scaler = StandardScaler()
     scaler.fit(x_train)
     x_train = scaler.fit_transform(x_train)
     x_test = scaler.fit_transform(x_test)
     
-    #Âß¼­»Ø¹é
+    #é€»è¾‘å›å½’
     model = LogisticRegression()
     model.fit(x_train,y_train)
     
-    # Ô¤²â
+    # é¢„æµ‹
     predict = model.predict(x_test)
     right = sum(predict == y_test)
     
-    predict = np.hstack((predict.reshape(-1,1),y_test.reshape(-1,1)))   # ½«Ô¤²âÖµºÍÕæÊµÖµ·ÅÔÚÒ»¿é£¬ºÃ¹Û²ì
+    predict = np.hstack((predict.reshape(-1,1),y_test.reshape(-1,1)))   # é¢„æµ‹å€¼çœŸæ˜¯å€¼æ”¾åœ¨ä¸€èµ·ä¾¿äºè§‚å¯Ÿ
     print predict
-    print ('²âÊÔ¼¯×¼È·ÂÊ£º%f%%'%(right*100.0/predict.shape[0]))          #¼ÆËãÔÚ²âÊÔ¼¯ÉÏµÄ×¼È·¶È
+    print ('æµ‹è¯•é›†å‡†ç¡®ç‡'%(right*100.0/predict.shape[0]))          #è®¡ç®—æµ‹è¯•é›†çš„å‡†ç¡®åº¦
 
-# ¼ÓÔØtxtºÍcsvÎÄ¼ş
+# åŠ è½½txtå’Œcsv
 def loadtxtAndcsv_data(fileName,split,dataType):
     return np.loadtxt(fileName,delimiter=split,dtype=dataType)
 
-# ¼ÓÔØnpyÎÄ¼ş
+# åŠ è½½npy
 def loadnpy_data(fileName):
     return np.load(fileName)
 
